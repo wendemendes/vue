@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <title>Aula 1</title>
+  </head>
+  <body>
+      <script src="https://unpkg.com/vue"></script>
+
+
+    <div id="app">
+        <h1>{{titulo}}</h1>
+        <li v-for="(linguagem, index) in linguagens">{{index}} - {{linguagem.nome}}</li>
+    </div>
+
+    <script>
+
+        var app = new Vue({
+          el: "#app",
+          data: {
+            titulo: "Exemplo Vue js",
+            linguagens:[
+                {nome: "Java"},
+                {nome: "Java script"},
+                {nome: "Ruby"},
+                {nome: "Scala"},
+                {nome: "Php"}
+            ]
+          }
+        });
+
+    </script>
+
+
+
+  </body>
+</html>

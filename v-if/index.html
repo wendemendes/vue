@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <title>Aula 1</title>
+  </head>
+  <body>
+      <script src="https://unpkg.com/vue"></script>
+
+
+    <div id="app">
+        <h1>{{titulo}}</h1>
+
+        <div v-if="usuario.usuarioKey == 2">
+            Código: {{usuario.usuarioKey}}, </br>
+            Nome: {{usuario.nome}}, </br>
+            Profissão: {{usuario.profissao}}
+          </div>
+          <div v-else>
+              Nenhum usuario encontrado
+          </div>
+    </div>
+
+
+
+    <script>
+
+        var app = new Vue({
+          el: "#app",
+          data: {
+            titulo: "Aula 1 Vue js",
+            usuario:{
+              usuarioKey: 1,
+              nome:"João",
+              profissao: "médico"
+            }
+          }
+        });
+
+    </script>
+
+
+
+  </body>
+</html>
