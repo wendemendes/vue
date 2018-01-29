@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <title>Aula 1</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.3/css/bootstrap.min.css" integrity="sha384-Zug+QiDoJOrZ5t4lssLdxGhVrurbmBWopoEl+M6BdEfwnCJZtKxi1KgxUyJq13dy" crossorigin="anonymous">
+
+  </head>
+  <body>
+      <script src="https://unpkg.com/vue"></script>
+
+      <br/><br/>
+
+    <div id="app">
+        <h1>{{titulo}}</h1>
+        <br/>
+
+          <div class="container">
+                  <input-form></input-form>
+                  <br/>
+                  <my-list></my-list>
+          </div>
+    </div>
+
+
+
+
+
+        <template id="form">
+          <div class="card">
+
+            <div class="card-header">Produtos para comprar na feira</div>
+               <div class="card-body">
+                  <form>
+                        <div class="form-group">
+                              <input v-model="title" type="text" class="form-control">
+                        </div>
+
+                        <button @click.stop.prevent="submit()" class="btn btn-primary">Enviar</button>
+                    </form>
+                </div>
+            </div>
+        </template>
+
+        <template id="list">
+          <ul class="list-group">
+            <li class="list-group-item list-group-item-primary">Produtos</li>
+            <li class="list-group-item" v-for="item in list">{{item.title}}</li>
+          </ul>
+      </template>
+
+  <script>
+
+    Vue.component('input-form', {
+      template: '#form',
+      data(){
+        return{
+          title: '',
+        }
+      },
+      methods: {
+        submit() {
+          this.$eventHub.$emit('enviarParaLista', this.title);
+          this.title = '';
+        }
+      }
+    });
+
+    Vue.component('my-list', {
+      template: '#list',
+      created() {
+        var vm = this;
+          this.$eventHub.$on('enviarParaLista', function(title){
+            if(title){
+              vm.list.push({title:title});
+            }
+          });
+        },
+
+        data(){
+          return{
+            list:[]
+          }
+        }
+    });
+
+    Vue.prototype.$eventHub = new Vue();
+
+        var app = new Vue({
+          el: "#app",
+          data: {
+            titulo: "Exemplo Vue js"
+          }
+
+
+        });
+
+    </script>
+
+
+
+  </body>
+</html>
