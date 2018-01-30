@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <title>Aula 1</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.3/css/bootstrap.min.css" integrity="sha384-Zug+QiDoJOrZ5t4lssLdxGhVrurbmBWopoEl+M6BdEfwnCJZtKxi1KgxUyJq13dy" crossorigin="anonymous">
+
+  </head>
+  <body>
+      <script src="https://unpkg.com/vue"></script>
+      <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+
+
+    <div id="app">
+        <h1>{{titulo}}</h1>
+
+        <button @click.stop.prevent="getUsers()" class="btn btn-success" >Buscar</button>
+        <br><br>
+        <ul class="list-group">
+          <li class="list-group-item" v-for="user in users">{{user.name}}</li>
+        </ul>
+    </div>
+
+<script>
+
+  var mixin = {
+
+    methods: {
+      getUsers() {
+          var url = 'http://jsonplaceholder.typicode.com/users';
+
+          var vm = this;
+            axios.get(url)
+              .then(function(response) {
+                  vm.users = response.data;
+              }).catch(function (error) {
+                console.log(error);
+              });
+      }
+    }
+  }
+
+      var app = new Vue({
+          el: "#app",
+
+          data: {
+            titulo: "Exemplo Vue js",
+            users: [],
+          },
+
+          mixins: [mixin],
+
+
+       });
+
+    </script>
+
+
+
+  </body>
+</html>
