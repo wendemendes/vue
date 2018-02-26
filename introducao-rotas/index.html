@@ -29,15 +29,15 @@
                   <div class="collapse navbar-collapse" id="navbarColor01">
                     <ul class="navbar-nav mr-auto">
                       <li class="nav-item active">
-                          <router-link class="nav-link" to="/home">Home</router-link>
+                          <router-link class="nav-link" :to="{name: 'home'}">Home</router-link>
                       </li>
 
                       <li class="nav-item">
-                          <router-link class="nav-link" to="/linguagens">Linguagens</router-link>
+                          <router-link class="nav-link" :to="{name: 'linguagens'}">Linguagens</router-link>
                       </li>
 
                       <li class="nav-item">
-                        <router-link class="nav-link" to="/comidas">Comidas</router-link>
+                        <router-link class="nav-link" :to="{name: 'comidas'}">Comidas</router-link>
                       </li>
 
                     </ul>
@@ -64,13 +64,37 @@
 
     <template id="comidas">
         <div>
-            <h2>{{titulo}}</h2>
+            <div class="row">
+              <div class="col">
+                    <h2>{{titulo}}</h2>
 
-            <ul class="list-group">
-              <li class="list-group-item" v-for="(comida, index) in comidas" :key="comida.name">{{comida.name}}</li>
-            </ul>
+                    <ul class="list-group">
+                      <li class="list-group-item" v-for="(comida, index) in comidas" :key="comida.name">
+                          <router-link :to="{name: 'comidaConteudo', params: {name: comida.slug}}">
+                            {{comida.name}}
+                        </router-link>
+                      </li>
+                    </ul>
+              </div>
+
+              <div class="col">
+                  <router-view></router-view>
+              </div>
+
+            </div>
+
+
         <div>
     </template>
+
+    <template id="comida-conteudo">
+        <div>
+            <h3>Conteúdo Comida</h3>
+            {{$route.params.name}}
+        <div>
+    </template>
+
+
 
 <script>
 
@@ -102,19 +126,28 @@ Vue.component('componente-menu', {
           return {
             titulo: 'Comidas',
             comidas: [
-               {name: 'Arroz'},
-                {name: 'Feijão'},
-                 {name: 'Batata'}
+               {name: 'Arroz', slug: 'arroz'},
+                {name: 'Feijão', slug: 'feijao'},
+                 {name: 'Batata', slug: 'batata'}
                ]
           }
         },
   });
 
+
+    var ComidasConteudo = Vue.component('componente-comida-conteudo', {
+      template: "#comida-conteudo",
+    });
+
 var router = new VueRouter({
   routes: [
-    {path: '/home', component: Home },
-    {path: '/linguagens', component: Linguagens},
-    {path: '/comidas',  component: Comidas},
+    {path: '/home',  name: 'home', component: Home },
+    {path: '/linguagens', name: 'linguagens', component: Linguagens},
+    {path: '/comidas',  name: 'comidas', component: Comidas ,
+        children: [
+          {path: ':name', name: 'comidaConteudo', component: ComidasConteudo},
+        ]
+    },
   ]
 })
 
@@ -122,6 +155,14 @@ var router = new VueRouter({
           el: "#app",
 
           router,
+
+          created() {
+            // console.log(this.$router);
+            // console.log(this.$route);
+
+            this.$router.push({name: 'comidaConteudo', params: {name: 'feijao'}})
+
+          },
 
           data: {
             titulo: "Nomes",
