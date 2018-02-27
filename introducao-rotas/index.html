@@ -40,6 +40,10 @@
                         <router-link class="nav-link" :to="{name: 'comidas'}">Comidas</router-link>
                       </li>
 
+                      <li class="nav-item">
+                        <router-link class="nav-link" to="/livros">Livros</router-link>
+                      </li>
+
                     </ul>
                   </div>
               </nav>
@@ -94,6 +98,14 @@
         <div>
     </template>
 
+    <template id="error404">
+        <div>
+            <h1>Pagina não encontrada</h1>
+            <p>Ops! Parece que esta pagina não existe</p>
+
+        <div>
+    </template>
+
 
 
 <script>
@@ -135,19 +147,29 @@ Vue.component('componente-menu', {
   });
 
 
-    var ComidasConteudo = Vue.component('componente-comida-conteudo', {
-      template: "#comida-conteudo",
-    });
+  var ComidasConteudo = Vue.component('componente-comida-conteudo', {
+    template: "#comida-conteudo",
+  });
+
+  var error404 = Vue.component('component-error404', {
+    template: "#error404",
+  });
 
 var router = new VueRouter({
   routes: [
-    {path: '/home',  name: 'home', component: Home },
+
+    // utilizar isto redirect quando por exemplo seu sistema esta em manutenca e precisa redirencionar para uma pagina.
+    // ou outro cenario que se encaixa ao sua necessidade
+    //{path: '/',  name: 'home', component: Home, redirect: {name: 'comidaConteudo', params: {name: 'feijao'}} },
+
+    {path: '/',  name: 'home', component: Home},
     {path: '/linguagens', name: 'linguagens', component: Linguagens},
     {path: '/comidas',  name: 'comidas', component: Comidas ,
         children: [
           {path: ':name', name: 'comidaConteudo', component: ComidasConteudo},
         ]
     },
+    {path: '*', name: 'erroe404', component: error404}
   ]
 })
 
@@ -160,7 +182,9 @@ var router = new VueRouter({
             // console.log(this.$router);
             // console.log(this.$route);
 
-            this.$router.push({name: 'comidaConteudo', params: {name: 'feijao'}})
+
+            //usar isto quando fazermos um ajax e precisamos redirencionar para outra pagina depois do retorno do ajax
+            //this.$router.push({name: 'comidaConteudo', params: {name: 'feijao'}})
 
           },
 
