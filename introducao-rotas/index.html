@@ -69,6 +69,10 @@
     <template id="comidas">
         <div>
             <div class="row">
+                <div v-if="sidebar" class="col">
+                  Sidebar
+                </div>
+
               <div class="col">
                     <h2>{{titulo}}</h2>
 
@@ -134,6 +138,14 @@ Vue.component('componente-menu', {
 
   var Comidas = Vue.component('componente-comida', {
     template: "#comidas",
+
+      props:{
+        sidebar: Boolean,
+      },
+        created() {
+          console.log("Side bar: " +  this.sidebar);
+
+        },
         data(){
           return {
             titulo: 'Comidas',
@@ -165,6 +177,7 @@ var router = new VueRouter({
     {path: '/',  name: 'home', component: Home},
     {path: '/linguagens', name: 'linguagens', component: Linguagens},
     {path: '/comidas',  name: 'comidas', component: Comidas ,
+       props: { sidebar: true },
         children: [
           {path: ':name', name: 'comidaConteudo', component: ComidasConteudo},
         ]
