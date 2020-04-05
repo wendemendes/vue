@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+
+    <div id="app">
+        <p>{{msg}}</p>
+        <p>{{ ehVerdade ? 'Verdade' : 'False'  }} </p>
+        <p>{{ frutas[1] + ' e ' + frutas[0] }}</p>
+        <p>{{ aluno.nome }}</p>
+        <p>{{ numero }}</p>
+        <p>{{ numeros[0] + numeros[1] }}</p>
+        <p>{{ mostarNome() }}</p>
+        <p>{{ mostarFrutas(1) }}</p>
+    </div>    
+
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+
+   <script>
+ 
+
+        new Vue({
+            
+            el: '#app',
+            data: {
+                msg: 'teste de mensagem',
+                ehVerdade: false,
+                frutas: ['Uva', 'Pera'],
+                aluno: { nome: 'Maria' },
+                numero: 1,
+                numeros: [1, 10]
+                
+            },
+            methods: {
+                mostarNome() {
+                    return 'wende mendes'
+                },
+                mostarFrutas(indice) {
+                    return  this.frutas[indice];
+                }
+            },
+            
+
+        })
+
+   </script>
+
+    
+    
+</body>
+</html>

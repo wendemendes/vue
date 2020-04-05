@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+
+    <div id="app">
+       <img v-bind:src="srcImg" v-bind:title="titleImg">
+           
+       <hr>
+       <a :href="url">google</a>
+
+       <p v-text="texto"></p>
+
+       <div v-html="textoHtml"></div>
+    </div>    
+
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+
+   <script>
+ 
+
+        new Vue({
+            
+            el: '#app',
+            data: {
+                srcImg:  'view_logo.png',
+                titleImg: 'Logo vue js' , 
+                url: 'http://www.google.com',
+                texto: 'teste texto',
+                textoHtml: 'teste texto <b>Html</b>'
+
+            }
+            
+
+        })
+
+   </script>
+
+    
+    
+</body>
+</html>

@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+    <div id="app">
+        <input type="text" v-model="textoDigitado">
+        <br>
+
+        {{textoDigitado}}
+
+        <div v-if="textoDigitado == 1">
+            {{frutas[0]}}
+        </div>
+
+        <div v-else-if="textoDigitado == 2">
+            {{frutas[1]}}
+        </div>
+
+
+        <div v-else="textoDigitado == 3">
+            {{frutas[2]}}
+        </div>
+
+
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+
+    <script>
+
+
+        new Vue({
+
+            el: '#app',
+            data: {
+                textoDigitado: '',
+                frutas: ['Abacate', 'Maca', 'Pera'],
+            }
+
+
+        })
+
+    </script>
+
+
+
+</body>
+
+</html>

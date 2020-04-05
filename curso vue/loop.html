@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+    <div id="app">
+        <br>
+        <p v-for="(fruta, index) in frutas">
+            {{index}} {{fruta.nome}} / {{fruta.cor}}
+        </p>
+
+        <ul>
+            <li v-for="(value, key, index) in usuario">
+                {{index}} - <b>{{key}}:</b> {{value}}
+
+            </li>
+        </ul>
+
+
+        <form v-on:submit.prevent="adicionar('test')">
+            <div>
+
+                <input type="text" v-model="textoDigitado" />
+                <br>
+
+                <button @click="alterarNome()">Alterar texto</button>
+                <br>
+                <label v-text="textoDigitado"></label>
+            </div>
+
+
+            <div>
+                <br>
+                <input type="text" v-model="textoAdicionar" />
+                <button type="submit">Add</button>
+
+            </div>
+
+        </form>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+
+    <script>
+
+        new Vue({
+
+            el: '#app',
+            data: {
+                textoDigitado: '',
+                textoAdicionar: '',
+                usuario: {
+                    nome: 'Wende mendes',
+                    telefone: '545454445',
+                    email: 'wendemendes@gmail.com',
+                    sobrenome: 'Higino'
+                },
+                frutas: [
+                    { nome: 'Abacate', cor: 'Verde' },
+                    { nome: 'Maca', cor: 'Verme;ho' },
+                    { nome: 'Pera', cor: 'Verde' }
+                ],
+            }, methods: {
+                alterarNome() {
+                    this.textoDigitado = 'Mudou para wende';
+                },
+                adicionar(sobrenome) {
+              
+                    this.textoAdicionar = sobrenome;
+                    console.log(event);
+                }
+            },
+
+
+        })
+
+    </script>
+
+
+
+</body>
+
+</html>
